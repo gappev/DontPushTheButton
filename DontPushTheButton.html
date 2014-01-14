@@ -1,0 +1,66 @@
+<head>		
+  <meta property="og:image" content="http://iblogwhatihear.com/wp-content/uploads/2011/05/red-button-med-30.jpg" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+  <title>Dont Push The Button</title>
+  <link href="/toastr.min.css" rel="stylesheet"/>
+  <script type="text/javascript" src="/toastr.min.js"></script>
+  <script type="text/javascript">
+		$(document).ready(function() 
+		{
+			var audioElement = document.getElementById('TheAudio');
+			audioElement.setAttribute('src', '/click.ogg');
+			audioElement.addEventListener("load", function() { 
+				audioElement.play(); 
+			}, true);
+			audioElement.load();
+		});
+
+
+	  function mouseup () {
+	  	var btn = document.getElementById('TheButton');
+	  	btn.src = '/button.png';	  	
+	  }
+
+	  function mousedown () {
+	  	var audioElement = document.getElementById('TheAudio');
+	  	
+	  	var btn = document.getElementById('TheButton');
+	  	btn.src = '/button_pressed.png';
+		audioElement.currentTime= 0;
+		audioElement.play();
+
+  		}
+  		console.log('5k Click Update: ');
+  		console.log('1. Added Client validation');
+  		console.log('2. Added Click Count to Window title');
+
+  		console.log('10k Click Update: ');
+  		console.log('1. Amount of users connected');
+
+  </script>
+</head>
+
+<body> 
+	{{> clicker}}
+</body>
+
+<template name="clicker">
+	<span class="topLeftCorner">Users Connected: {{count}} </span>
+	<span class="topcorner" > Next Update at 25,000 Clicks </span>
+	<audio id="TheAudio" src="/click.ogg" />
+	<div> 
+		<div class='textOverImage textStyle textFontSize'>
+		    	Count: {{clicks}}
+		</div> 
+		<div>
+  			<a id ="TheButtonWrapper" onmouseup='mouseup()' onmousedown='mousedown()'>
+  				<img id='TheButton' src='/button.png' class='btnImage center'/>
+  			</a>
+  		</div>
+
+
+  	</div>
+
+</template>
+
+
